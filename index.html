@@ -5,8 +5,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
     <title>Library</title>
   </head>
-  <body></body>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>Library</h1>
+        <button id="btn">Add Book</button>
+      </div>
+      <div class="content">
+        <div class="card"></div>
+      </div>
+      <div class="footer">Created by Krimothiazine</div>
+    </div>
+    <div class="modal">
+      <p>Enter the infomations of Book you want to add</p>
+      <form action="">
+        <div class="wrapper">
+          <label for="title">Title</label>
+          <input type="text" id="title" name="title" />
+        </div>
+        <div class="wrapper">
+          <label for="author">Author</label>
+          <input type="text" id="author" name="author" />
+        </div>
+        <div class="wrapper">
+          <label for="pages">Number of pages</label>
+          <input type="number" id="pages" name="pages" />
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </body>
 </html>
