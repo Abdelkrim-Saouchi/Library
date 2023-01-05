@@ -50,10 +50,11 @@ h1 {
   color: white;
   text-align: center;
   background-color: #8f5346;
-  border-radius: 12px;
+  border-radius: 16px;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.2);
 }
 
 .card #read-status {
@@ -92,13 +93,15 @@ h1 {
 .modal {
   display: none;
   position: absolute;
-  width: max-content;
-  height: max-content;
-  background-color: aqua;
+  max-width: 30%;
+  min-height: 40;
+  background-color: #923f0e;
+  color: white;
   top: calc(50% - 200px);
   left: calc(50% - 200px);
   border-radius: 12px;
   padding: 14px 14px;
+  box-shadow: 2px 2px 8px 8px rgba(0, 0, 0, 0.2);
 }
 
 .modal p {
@@ -114,11 +117,23 @@ form {
 }
 
 form .wrapper {
-  /* flex-grow: 1; */
+  display: flex;
+  align-items: center;
+  gap: 25px;
 }
 
 .wrapper input {
   width: 60%;
+  height: 25px;
+  font-weight: 700;
+  padding-left: 10px;
+  border-radius: 8px;
+}
+
+.wrapper #read {
+  height: 14px;
+  margin-left: 25%;
+  flex-basis: content;
 }
 
 label[for='title'] {
@@ -131,4 +146,12 @@ label[for='author'] {
 button[type='submit'] {
   align-self: center;
   padding: 8px 16px;
+  border-radius: 12px;
+  border: 0;
+  outline: 0;
+  background-color: #ab6557;
+}
+
+button[type='submit']:is(:focus, :hover) {
+  background-color: #c98f83;
 }

@@ -102,6 +102,13 @@ function AddBookToDom(arr) {
   });
 }
 
+function clearForm() {
+  document.querySelector('#title').value = '';
+  document.querySelector('#author').value = '';
+  document.querySelector('#pages').value = '';
+  document.querySelector('#read').checked = false;
+}
+
 const addBtn = document.querySelector('#btn');
 const content = document.querySelector('.content');
 const modal = document.querySelector('.modal');
@@ -120,6 +127,7 @@ submitBtn.addEventListener('click', (e) => {
   AddBookToDom(myLibrary);
 
   displayFormModal('none', '1');
+  clearForm();
 });
 
 content.addEventListener('click', (e) => {
