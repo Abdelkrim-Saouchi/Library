@@ -1,15 +1,17 @@
 /* eslint-disable prefer-const */
 const myLibrary = [
-  // {
-  //   title: 'Hurry Potter',
-  //   author: 'Unkown',
-  //   pages: 230,
-  // },
-  // {
-  //   title: 'Hurry Potter',
-  //   author: 'Unkown',
-  //   pages: 230,
-  // },
+  {
+    title: 'Hurry Potter',
+    author: 'Unkown',
+    pages: 230,
+    readStatus: 'Not read',
+  },
+  {
+    title: 'Hurry Potter',
+    author: 'Unkown',
+    pages: 230,
+    readStatus: 'Not read',
+  },
 ];
 
 const addBtn = document.querySelector('#btn');
@@ -43,17 +45,24 @@ function AddBookToDom() {
     card.className = 'card';
     card.dataset.id = myLibraryList.indexOf(book);
     content.appendChild(card);
+
     const bookTitle = document.createElement('h3');
     bookTitle.textContent = `${book.title}`;
+
     const bookAuthor = document.createElement('p');
     bookAuthor.textContent = `${book.author}`;
+
     const bookPages = document.createElement('p');
-    bookPages.textContent = `${book.pages}`;
+    bookPages.textContent = `${book.pages} pages`;
+
     const bookStatus = document.createElement('p');
     bookStatus.textContent = `${book.readStatus}`;
+    bookStatus.id = 'read-status';
+
     const removeBtn = document.createElement('button');
     removeBtn.id = 'remove';
     removeBtn.textContent = 'Remove';
+
     card.appendChild(bookTitle);
     card.appendChild(bookAuthor);
     card.appendChild(bookPages);
@@ -68,13 +77,16 @@ submitBtn.addEventListener('click', (e) => {
   let title = document.getElementById('title').value;
   let author = document.getElementById('author').value;
   let pages = document.getElementById('pages').value;
+
   const readStatusObj = document.getElementById('read');
   let readStatus = readStatusObj.value;
   if (readStatusObj.checked) {
     readStatus = 'read';
   }
+
   AddBookToLibrary(title, author, pages, readStatus);
   AddBookToDom();
+
   modal.style.display = 'none';
   container.style.opacity = '1';
 });
@@ -85,4 +97,18 @@ content.addEventListener('click', (e) => {
     myLibrary.splice(index, 1);
     e.target.parentElement.remove();
   }
+  if (e.target.id === 'read-status') {
+    const book = myLibrary[e.target.parentElement.dataset.id];
+    if (e.target.textContent === 'Not read') {
+      e.target.style.color = 'green';
+      e.target.textContent = 'read';
+      book.readStatus = 'read';
+    } else {
+      e.target.style.color = 'rgb(187, 0, 0)';
+      e.target.textContent = 'Not read';
+      book.readStatus = 'Not read';
+    }
+  }
 });
+
+// AddBookToDom();
