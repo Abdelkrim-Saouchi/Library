@@ -1,3 +1,5 @@
+/* eslint-disable no-use-before-define */
+/* eslint-disable no-param-reassign */
 /* eslint-disable prefer-const */
 const myLibrary = [
   {
@@ -14,12 +16,6 @@ const myLibrary = [
   },
 ];
 
-const addBtn = document.querySelector('#btn');
-const content = document.querySelector('.content');
-const modal = document.querySelector('.modal');
-const container = document.querySelector('.container');
-const submitBtn = document.querySelector('button[type="submit"]');
-
 function Book(title, author, pages, readStatus) {
   this.title = title;
   this.author = author;
@@ -27,19 +23,51 @@ function Book(title, author, pages, readStatus) {
   this.readStatus = readStatus;
 }
 
-function AddBookToLibrary(title, author, pages, readStatus) {
+function AddBookToLibrary(arr, title, author, pages, readStatus) {
   const book = new Book(title, author, pages, readStatus);
-  myLibrary.push(book);
+  arr.push(book);
 }
 
-addBtn.addEventListener('click', () => {
-  modal.style.display = 'block';
-  container.style.opacity = '0.5';
-});
+function displayFormModal(display, opacity) {
+  modal.style.display = display;
+  container.style.opacity = opacity;
+}
 
-function AddBookToDom() {
+function getUserInputs() {
+  let title = document.getElementById('title').value;
+  let author = document.getElementById('author').value;
+  let pages = document.getElementById('pages').value;
+
+  const readStatusObj = document.getElementById('read');
+  let readStatus = readStatusObj.value;
+  if (readStatusObj.checked) {
+    readStatus = 'read';
+  }
+  return [title, author, pages, readStatus];
+}
+
+function deleteBookFromDom(ele, arr) {
+  let index = ele.parentElement.dataset.id;
+  arr.splice(index, 1);
+  ele.parentElement.remove();
+}
+
+function toggleReadStatus(ele, arr) {
+  const book = arr[ele.parentElement.dataset.id];
+  if (ele.textContent === 'Not read') {
+    ele.style.color = 'green';
+    ele.textContent = 'read';
+    book.readStatus = 'read';
+  } else {
+    ele.style.color = 'rgb(187, 0, 0)';
+    ele.textContent = 'Not read';
+    book.readStatus = 'Not read';
+  }
+}
+
+function AddBookToDom(arr) {
   content.innerHTML = '';
-  const myLibraryList = Array.from(myLibrary);
+  const myLibraryList = Array.from(arr);
   myLibraryList.forEach((book) => {
     const card = document.createElement('div');
     card.className = 'card';
@@ -58,6 +86,9 @@ function AddBookToDom() {
     const bookStatus = document.createElement('p');
     bookStatus.textContent = `${book.readStatus}`;
     bookStatus.id = 'read-status';
+    if (book.readStatus === 'read') {
+      bookStatus.style.color = 'green';
+    }
 
     const removeBtn = document.createElement('button');
     removeBtn.id = 'remove';
@@ -71,44 +102,33 @@ function AddBookToDom() {
   });
 }
 
-// AddBookToDom();
+const addBtn = document.querySelector('#btn');
+const content = document.querySelector('.content');
+const modal = document.querySelector('.modal');
+const container = document.querySelector('.container');
+const submitBtn = document.querySelector('button[type="submit"]');
+
+addBtn.addEventListener('click', () => {
+  displayFormModal('block', '0.5');
+});
+
 submitBtn.addEventListener('click', (e) => {
   e.preventDefault();
-  let title = document.getElementById('title').value;
-  let author = document.getElementById('author').value;
-  let pages = document.getElementById('pages').value;
+  const inputs = getUserInputs();
 
-  const readStatusObj = document.getElementById('read');
-  let readStatus = readStatusObj.value;
-  if (readStatusObj.checked) {
-    readStatus = 'read';
-  }
+  AddBookToLibrary(myLibrary, ...inputs);
+  AddBookToDom(myLibrary);
 
-  AddBookToLibrary(title, author, pages, readStatus);
-  AddBookToDom();
-
-  modal.style.display = 'none';
-  container.style.opacity = '1';
+  displayFormModal('none', '1');
 });
 
 content.addEventListener('click', (e) => {
   if (e.target.id === 'remove') {
-    let index = e.target.parentElement.dataset.id;
-    myLibrary.splice(index, 1);
-    e.target.parentElement.remove();
+    deleteBookFromDom(e.target, myLibrary);
   }
   if (e.target.id === 'read-status') {
-    const book = myLibrary[e.target.parentElement.dataset.id];
-    if (e.target.textContent === 'Not read') {
-      e.target.style.color = 'green';
-      e.target.textContent = 'read';
-      book.readStatus = 'read';
-    } else {
-      e.target.style.color = 'rgb(187, 0, 0)';
-      e.target.textContent = 'Not read';
-      book.readStatus = 'Not read';
-    }
+    toggleReadStatus(e.target, myLibrary);
   }
 });
 
-// AddBookToDom();
+// AddBookToDom(myLibrary);
