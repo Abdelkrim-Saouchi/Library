@@ -128,12 +128,26 @@ form .wrapper {
   font-weight: 700;
   padding-left: 10px;
   border-radius: 8px;
+  outline: 0;
+  border: 0;
+}
+
+.wrapper input:invalid {
+  border: 2px solid red;
+}
+
+.wrapper input:valid {
+  border: 2px solid green;
 }
 
 .wrapper #read {
   height: 14px;
   margin-left: 25%;
   flex-basis: content;
+}
+
+.wrapper #read:focus {
+  outline: 1px solid white;
 }
 
 label[for='title'] {

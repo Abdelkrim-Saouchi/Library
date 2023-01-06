@@ -102,6 +102,24 @@ function AddBookToDom(arr) {
   });
 }
 
+function isValidate() {
+  let title = document.querySelector('#title').value;
+  let author = document.querySelector('#author').value;
+  let pages = document.querySelector('#pages').value;
+  if (title === '' || author === '' || pages === '') {
+    const alertMsg = document.createElement('p');
+    alertMsg.textContent = '*Please fill all inputs';
+    alertMsg.id = 'alert';
+    alertMsg.style.color = 'red';
+    modal.insertBefore(alertMsg, document.querySelector('form'));
+    setTimeout(() => {
+      alertMsg.remove();
+    }, 3000);
+    return false;
+  }
+  return true;
+}
+
 function clearForm() {
   document.querySelector('#title').value = '';
   document.querySelector('#author').value = '';
@@ -121,13 +139,15 @@ addBtn.addEventListener('click', () => {
 
 submitBtn.addEventListener('click', (e) => {
   e.preventDefault();
-  const inputs = getUserInputs();
+  if (isValidate()) {
+    const inputs = getUserInputs();
 
-  AddBookToLibrary(myLibrary, ...inputs);
-  AddBookToDom(myLibrary);
+    AddBookToLibrary(myLibrary, ...inputs);
+    AddBookToDom(myLibrary);
 
-  displayFormModal('none', '1');
-  clearForm();
+    displayFormModal('none', '1');
+    clearForm();
+  }
 });
 
 content.addEventListener('click', (e) => {
