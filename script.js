@@ -23,6 +23,20 @@ function Book(title, author, pages, readStatus) {
   this.readStatus = readStatus;
 }
 
+// eslint-disable-next-line func-names
+Book.prototype.toggleReadStatus = function (ele) {
+  if (this.readStatus === 'read') {
+    this.readStatus = 'Not read';
+    ele.style.color = 'rgb(187, 0, 0)';
+    ele.textContent = 'Not read';
+  } else {
+    this.readStatus = 'read';
+    ele.style.color = 'green';
+    ele.textContent = 'read';
+  }
+};
+Book.prototype.constructor = Book;
+
 function AddBookToLibrary(arr, title, author, pages, readStatus) {
   const book = new Book(title, author, pages, readStatus);
   arr.push(book);
@@ -52,18 +66,18 @@ function deleteBookFromDom(ele, arr) {
   ele.parentElement.remove();
 }
 
-function toggleReadStatus(ele, arr) {
-  const book = arr[ele.parentElement.dataset.id];
-  if (ele.textContent === 'Not read') {
-    ele.style.color = 'green';
-    ele.textContent = 'read';
-    book.readStatus = 'read';
-  } else {
-    ele.style.color = 'rgb(187, 0, 0)';
-    ele.textContent = 'Not read';
-    book.readStatus = 'Not read';
-  }
-}
+// function toggleReadStatus(ele, arr) {
+//   const book = arr[ele.parentElement.dataset.id];
+//   if (ele.textContent === 'Not read') {
+//     ele.style.color = 'green';
+//     ele.textContent = 'read';
+//     book.readStatus = 'read';
+//   } else {
+//     ele.style.color = 'rgb(187, 0, 0)';
+//     ele.textContent = 'Not read';
+//     book.readStatus = 'Not read';
+//   }
+// }
 
 function AddBookToDom(arr) {
   content.innerHTML = '';
@@ -155,7 +169,8 @@ content.addEventListener('click', (e) => {
     deleteBookFromDom(e.target, myLibrary);
   }
   if (e.target.id === 'read-status') {
-    toggleReadStatus(e.target, myLibrary);
+    let bookIndex = e.target.parentElement.dataset.id;
+    myLibrary[bookIndex].toggleReadStatus(e.target);
   }
 });
 
