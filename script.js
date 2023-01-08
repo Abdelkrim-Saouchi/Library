@@ -119,6 +119,7 @@ const content = document.querySelector('.content');
 const modal = document.querySelector('.modal');
 const container = document.querySelector('.container');
 const submitBtn = document.querySelector('button[type="submit"]');
+const cancelBtn = document.querySelector('button[type="button"]');
 
 addBtn.addEventListener('click', () => {
   displayFormModal('block', '0.5');
@@ -137,6 +138,11 @@ submitBtn.addEventListener('click', (e) => {
   }
 });
 
+cancelBtn.addEventListener('click', () => {
+  displayFormModal('none', '1');
+  clearForm();
+});
+
 content.addEventListener('click', (e) => {
   if (e.target.id === 'remove') {
     deleteBookFromDom(e.target, myLibrary);
@@ -146,5 +152,3 @@ content.addEventListener('click', (e) => {
     myLibrary[bookIndex].toggleReadStatus(e.target);
   }
 });
-
-// AddBookToDom(myLibrary);

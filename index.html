@@ -12,10 +12,15 @@
     <div class="container">
       <div class="header">
         <h1>Library</h1>
-        <button id="btn">Add Book</button>
+        <button id="btn">New Book</button>
       </div>
       <div class="content"></div>
-      <div class="footer">Created by Krimothiazine</div>
+      <div class="footer">
+        Created by
+        <a href="https://github.com/karim-saou" target="_blank"
+          >Krimothiazine</a
+        >
+      </div>
     </div>
     <div class="modal">
       <p>Enter the infomations of Book you want to add</p>
@@ -36,7 +41,10 @@
           <input type="checkbox" id="read" name="readStatus" value="Not read" />
           <label for="read">I have read this Book</label>
         </div>
-        <button type="submit">Submit</button>
+        <div class="wrapper btns">
+          <button type="submit">Submit</button>
+          <button type="button">Cancel</button>
+        </div>
       </form>
     </div>
   </body>

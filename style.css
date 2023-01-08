@@ -1,3 +1,11 @@
+:root {
+  --btn-bg: #cfe795;
+  --btn-active: #a7d3a6;
+  --bg-color: #d4c685;
+  --white: white;
+  --shadow: 1px 3px 8px 1px rgba(128, 128, 128, 0.7);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -17,9 +25,9 @@
   justify-content: space-between;
   justify-items: center;
   padding: 10px 32px;
-  background-color: antiquewhite;
+  background-color: var(--bg-color);
   z-index: 100;
-  box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow);
 }
 
 h1 {
@@ -27,14 +35,16 @@ h1 {
 }
 
 #btn {
+  justify-self: end;
   padding: 10px 16px;
   border: 0;
-  background-color: #e5c3bc;
+  background-color: var(--btn-bg);
   border-radius: 16px;
+  font-weight: 600;
 }
 
 #btn:is(:focus, :hover) {
-  background-color: #d4a095;
+  background-color: var(--btn-active);
 }
 
 .content {
@@ -47,19 +57,18 @@ h1 {
 .card {
   height: 200px;
   padding: 32px;
-  color: white;
   text-align: center;
-  background-color: #8f5346;
+  background-color: var(--bg-color);
   border-radius: 16px;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow);
 }
 
 .card #read-status {
   cursor: pointer;
-  background-color: #c98f83;
+  background-color: var(--btn-bg);
   color: rgb(187, 0, 0);
   font-weight: 600;
   border-radius: 16px;
@@ -67,7 +76,7 @@ h1 {
 }
 
 .card #read-status:is(:focus, :hover) {
-  background-color: #ab6557;
+  background-color: var(--btn-active);
 }
 
 .card #remove {
@@ -75,19 +84,29 @@ h1 {
   border: 0;
   padding: 8px 16px;
   font-weight: 600;
-  background-color: #e5c3bc;
+  background-color: var(--btn-bg);
   border-radius: 16px;
 }
 
 .card #remove:is(:focus, :hover) {
-  background-color: #d4a095;
+  background-color: var(--btn-active);
 }
 
 .footer {
   display: grid;
   place-items: center;
   padding: 12px;
-  background-color: aliceblue;
+  font-weight: 700;
+}
+
+.footer a {
+  text-decoration: none;
+  color: var(--bg-color);
+  line-height: 1.6;
+}
+
+.footer a:is(:hover, :focus) {
+  text-decoration-line: underline;
 }
 
 .modal {
@@ -95,13 +114,12 @@ h1 {
   position: absolute;
   max-width: 30%;
   min-height: 40;
-  background-color: #923f0e;
-  color: white;
+  background-color: var(--bg-color);
   top: calc(50% - 200px);
   left: calc(50% - 200px);
   border-radius: 12px;
   padding: 14px 14px;
-  box-shadow: 2px 2px 8px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow);
 }
 
 .modal p {
@@ -147,7 +165,7 @@ form .wrapper {
 }
 
 .wrapper #read:focus {
-  outline: 1px solid white;
+  outline: 1px solid var(--white);
 }
 
 label[for='title'] {
@@ -157,15 +175,23 @@ label[for='author'] {
   margin-right: 64px;
 }
 
-button[type='submit'] {
-  align-self: center;
+.wrapper.btns {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+button[type='submit'],
+button[type='button'] {
   padding: 8px 16px;
   border-radius: 12px;
   border: 0;
   outline: 0;
-  background-color: #ab6557;
+  background-color: var(--btn-bg);
+  font-weight: 600;
 }
 
-button[type='submit']:is(:focus, :hover) {
-  background-color: #c98f83;
+button[type='submit']:is(:focus, :hover),
+button[type='button']:is(:focus, :hover) {
+  background-color: var(--btn-active);
 }
