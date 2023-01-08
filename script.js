@@ -1,20 +1,7 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable no-param-reassign */
 /* eslint-disable prefer-const */
-const myLibrary = [
-  {
-    title: 'Hurry Potter',
-    author: 'Unkown',
-    pages: 230,
-    readStatus: 'Not read',
-  },
-  {
-    title: 'Hurry Potter',
-    author: 'Unkown',
-    pages: 230,
-    readStatus: 'Not read',
-  },
-];
+const myLibrary = [];
 
 function Book(title, author, pages, readStatus) {
   this.title = title;
@@ -35,7 +22,6 @@ Book.prototype.toggleReadStatus = function (ele) {
     ele.textContent = 'read';
   }
 };
-Book.prototype.constructor = Book;
 
 function AddBookToLibrary(arr, title, author, pages, readStatus) {
   const book = new Book(title, author, pages, readStatus);
@@ -65,19 +51,6 @@ function deleteBookFromDom(ele, arr) {
   arr.splice(index, 1);
   ele.parentElement.remove();
 }
-
-// function toggleReadStatus(ele, arr) {
-//   const book = arr[ele.parentElement.dataset.id];
-//   if (ele.textContent === 'Not read') {
-//     ele.style.color = 'green';
-//     ele.textContent = 'read';
-//     book.readStatus = 'read';
-//   } else {
-//     ele.style.color = 'rgb(187, 0, 0)';
-//     ele.textContent = 'Not read';
-//     book.readStatus = 'Not read';
-//   }
-// }
 
 function AddBookToDom(arr) {
   content.innerHTML = '';
