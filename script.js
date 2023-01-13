@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 /* eslint-disable max-classes-per-file */
 /* eslint-disable no-use-before-define */
 /* eslint-disable no-param-reassign */
@@ -35,7 +36,7 @@ class DisplayController {
     this.array.push(book);
   }
 
-  displayFormModal(display, opacity) {
+  displayFormModal(modal, container, display, opacity) {
     modal.style.display = display;
     container.style.opacity = opacity;
   }
@@ -59,7 +60,7 @@ class DisplayController {
     ele.parentElement.remove();
   }
 
-  AddBookToDom() {
+  AddBookToDom(content) {
     content.innerHTML = '';
     const myLibraryList = Array.from(this.array);
     myLibraryList.forEach((book) => {
@@ -96,7 +97,7 @@ class DisplayController {
     });
   }
 
-  isValidate() {
+  isValid(modal) {
     const [title, author, pages] = this.getUserInputs();
     if (title === '' || author === '' || pages === '') {
       const alertMsg = document.createElement('p');
@@ -130,24 +131,24 @@ const submitBtn = document.querySelector('button[type="submit"]');
 const cancelBtn = document.querySelector('button[type="button"]');
 
 addBtn.addEventListener('click', () => {
-  displayController.displayFormModal('block', '0.5');
+  displayController.displayFormModal(modal, container, 'block', '0.5');
 });
 
 submitBtn.addEventListener('click', (e) => {
   e.preventDefault();
-  if (displayController.isValidate()) {
+  if (displayController.isValid(modal)) {
     const inputs = displayController.getUserInputs();
 
     displayController.AddBookToLibrary(...inputs);
-    displayController.AddBookToDom();
+    displayController.AddBookToDom(content);
 
-    displayController.displayFormModal('none', '1');
+    displayController.displayFormModal(modal, container, 'none', '1');
     displayController.clearForm();
   }
 });
 
 cancelBtn.addEventListener('click', () => {
-  displayController.displayFormModal('none', '1');
+  displayController.displayFormModal(modal, container, 'none', '1');
   displayController.clearForm();
 });
 
